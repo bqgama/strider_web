@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+  has_many :follower_list, foreign_key: :following_id, class_name: 'Friendship'
+  has_many :followers, through: :follower_list
+
+  has_many :following_list, foreign_key: :follower_id,  class_name: 'Friendship'
+  has_many :followings, through: :following_list
+
   validates :username,
     presence: true,
     length: { maximum: 14 },
