@@ -1,8 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :update, :destroy]
   before_action :set_post_owner, only: :index
-  before_action :set_user, only: [:index, :create]
-
+  before_action :set_current_user, only: [:index, :create]
 
   def index
     if @post_owner == 'All'
@@ -25,17 +23,14 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
-
     def set_post_owner
       @post_owner = params[:home_id]
     end
 
     #Do not build authentication (So I used the first user as authenticated user)
-    def set_user
+    def set_current_user
       @user = User.first
+      # @user = current_user
     end
 
     def post_params
