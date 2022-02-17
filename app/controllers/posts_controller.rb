@@ -13,9 +13,12 @@ class PostsController < ApplicationController
   end
 
   def create
+    cant_create = Post.posts_made_by_this_user(@current_user.id)
+                      .order(:created_at).last(5).all? { |post| post.created_at.today? }
+
     @post = Post.new(post_params)
 
-    if @post.save
+    if !cant_create && @post.save
       render json: @post, status: :created
     else
       render json: @post.errors, status: :unprocessable_entity
