@@ -9,7 +9,7 @@ class User < ApplicationRecord
     presence: true,
     length: { maximum: 14 },
     format: { with: /\A[A-Za-z0-9]+\z/,
-      message: "only allows letters" },
+      message: "only allows letters and numbers" },
     on: :create
 
   def number_of_followers
