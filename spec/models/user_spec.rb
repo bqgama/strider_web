@@ -11,7 +11,6 @@ RSpec.describe User do
   end
 
   describe '#methods' do
-    
 
     it 'number_of_followers / number_of_followings' do
       user1 = User.create!(username: 'teste1', date_joined: Date.today)
