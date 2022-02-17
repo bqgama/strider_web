@@ -12,11 +12,11 @@ class User < ApplicationRecord
       message: "only allows letters" },
     on: :create
 
-    def number_of_followers
-      followers.count
-    end
+  def number_of_followers
+    followers.count
+  end
 
-    def number_of_followings
-      followings.count
-    end
+  def number_of_followings
+    followings.count
+  end
 end
