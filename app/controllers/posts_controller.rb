@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     if @post_owner == 'All'
       @posts = Post.all
     elsif @post_owner == 'following'
-      @posts = Post.where(user_id: @user.followings.pluck(:id))
+      @posts = Post.where(user_id: @current_user.followings.pluck(:id))
     end
 
     render json: @posts
@@ -29,11 +29,11 @@ class PostsController < ApplicationController
 
     #Do not build authentication (So I used the first user as authenticated user)
     def set_current_user
-      @user = User.first
-      # @user = current_user
+      @current_user = User.first
+      # @current_user = current_user
     end
 
     def post_params
-      params.require(:post).permit(:body, :kind).merge(user_id: @user.id)
+      params.require(:post).permit(:body, :kind).merge(user_id: @current_user.id)
     end
 end
